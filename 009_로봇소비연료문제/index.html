@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>산 넘고 물 건너 최단 경로를 찾아라</title>
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="../cmn/utl.js" charset="UTF-8"></script>
+  <script src="../cmn/xors.js" charset="UTF-8"></script>
+  <script src="mkMap.js" charset="UTF-8"></script>
+  <script src="rndr.js" charset="UTF-8"></script>
+  <script src="main.js" charset="UTF-8"></script>
+  <script src="code.js" charset="UTF-8"></script>
+</head>
+<body>
+  <h1>산 넘고 물 건너 최단 경로를 찾아라</h1>
+  <h2>● 코드 입력</h2>
+  <div>
+	<br><textarea id="src" style="width: 600px; height: 250px;">
+	</textarea><br>
+  </div>
+
+  <div>
+	랜덤 시드<input type="text" value="0" id="seed"><br>
+	<input type="button" value="코드를 확인" id="chck">
+	<input type="button" value="시드를 1증가시켜 확인" id="chckPls1">
+	<input type="button" value="100번 확인" id="chck100">
+	<input type="text" value="200" id="tryNo" 
+		style="width: 5em; text-align: right;">
+	<input type="button" value="번 확인" id="chckN">
+  </div>
+
+  <h2>● 결과 판정</h2>
+  <div>（빨간색이 당신, 파란색이 COM）</div>
+  <div id="cnvsArea"></div>
+  <textarea id="res" style="width: 600px; height: 10em;">
+  </textarea>
+</body>
+</html>

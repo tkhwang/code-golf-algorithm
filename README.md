@@ -4,3 +4,7 @@
 
 * 소스 코드 : http://download.hanbit.co.kr/exam/2167/
 
+## Branch
+
+* `master` : 출판사 제공 소스 코드
+* `dev` : my own solution

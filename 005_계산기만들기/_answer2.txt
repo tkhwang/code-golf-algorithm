@@ -1,0 +1,112 @@
+function yourCode(arg) {
+	// 사용되는 함수를 작성
+
+	// 식의 중첩
+	function nest(arrSrc, arrDst, mark) {
+		// 입력 배열이 빌때 까지 실시
+		while(arrSrc.length) {
+			var tgt = arrSrc.shift();
+			if (mark.indexOf(tgt) >= 0) {
+				// 지정된 기호인 경우에는 역 폴란드 표기법으로 중첩
+				var bfr  = arrDst.pop();
+				var aftr = arrSrc.shift();
+				arrDst.push([bfr, aftr, tgt]);
+			} else {
+				// 그 이외에는 출력 배열에 저장
+				arrDst.push(tgt);
+			}
+		}
+	}
+
+	// 식의 전개
+	function expand(arrSrc, arrDst) {
+		var tgt = arrSrc.shift();
+		if (tgt instanceof Array) {
+			// 배열인 경우에는 중첩
+			arguments.callee(tgt, arrDst);
+		} else {
+			// 그 이외에는 출력 배열에 저장
+			arrDst.push(tgt);
+		}
+		if (arrSrc.length > 0) {
+			// 입력 배열에 요소가 남아있으면 재귀호출
+			arguments.callee.apply(this, arguments);
+		}
+	}
+
+	// 역 폴란드 표기 배열을 계산
+	function reversePolishNotation(arrSrc, arrDst) {
+		// 입력 배열이 빌 때까지 실시
+		while(arrSrc.length) {
+			var tgt = arrSrc.shift();
+			if(tgt.match(/\d/)) {
+				// 수치일 경우에는 출력 배열에 저장
+				arrDst.push(~~tgt);
+			} else {
+				// 연산자일 경우에는 앞의 2개의 값을 꺼냄
+				var aftr = arrDst.pop();
+				var bfr  = arrDst.pop();
+
+				// 계산 결과를 출력 배열에 저장
+				var r;
+				if (tgt == "+") {r = bfr + aftr;}
+				if (tgt == "*") {r = bfr * aftr;}
+				if (tgt == "/") {r = bfr / aftr;}
+				arrDst.push(r);
+
+				console.log(bfr + "," + aftr + "," + tgt
+					+ " -> " + r);
+			}
+		}
+	}
+
+	// 배열 출력용 함수
+	function dump(arr) {
+		var res = [];
+		for (var i = 0; i < arr.length; i ++) {
+			var dat = arr[i];
+			if (dat instanceof Array) {
+				res.push(dump(dat));
+			} else {
+				res.push(dat);
+			}
+		}
+		return "[" + res.join(", ") + "]";
+	}
+
+	//========================================
+
+	// 식을 변환
+	var repStr = arg.replace(/(\d)-/g, "$1+-");
+
+	// 식을 분할
+	var splt = repStr.match(/[-\d]+|./g);
+	console.log("분할:", dump(splt));
+
+	// 곱셈, 나눗셈을 역 폴란드 표기법으로 바꾸어 중첩시키기
+	var arrSrc = splt;
+	var arrDst = [];
+	nest(arrSrc, arrDst, "*/");
+	console.log("곱셈, 나눗셈:", dump(arrDst));
+
+	// 덧셈을 역 폴란드 표기법으로 바꾸어서 중첩시키기
+	arrSrc = arrDst;
+	arrDst = [];
+	nest(arrSrc, arrDst, "+");
+	console.log("덧셈:", dump(arrDst));
+
+	// 역 폴란드 표기 배열을 전개
+	arrSrc = arrDst;
+	arrDst = [];
+	expand(arrSrc, arrDst);
+	console.log("전개:", dump(arrDst));
+
+	// 역 폴란드 표기 배열을 계산
+	arrSrc = arrDst;
+	arrDst = [];
+	console.log("역 폴란드 표기 배열의 계산:");
+	reversePolishNotation(arrSrc, arrDst);
+	console.log("답:", arrDst[0]);
+
+	return arrDst[0];
+}

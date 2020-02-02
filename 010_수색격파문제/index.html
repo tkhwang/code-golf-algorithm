@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>암흑혹성에서의 전쟁 - 적을 찾아 격파하라</title>
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="../cmn/utl.js" charset="UTF-8"></script>
+  <script src="../cmn/xors.js" charset="UTF-8"></script>
+  <script src="p.js" charset="UTF-8"></script>
+  <script src="rndr.js" charset="UTF-8"></script>
+  <script src="makeEnemies.js" charset="UTF-8"></script>
+  <script src="main.js" charset="UTF-8"></script>
+  <script src="code.js" charset="UTF-8"></script>
+</head>
+<body>
+  <h1>암흑혹성에서의 전쟁 - 적을 찾아 격파하라</h1>
+  <h2>● 적 배치</h2>
+  <div id="prmStr" style="border: solid 1px gray; 
+  background: #eeeeee; padding: 0.5em; line-height: 175%;">
+	<table>
+	<tr><td>w :</td>
+		<td>500</td>
+		<td>맵 가로폭</td></tr>
+	<tr><td>h :</td>
+		<td>500</td>
+		<td>맵 높이</td></tr>
+	<tr><td>bomb :</td>
+		<td><input type="text" id="_p_bomb"></td>
+		<td>포탄수</td></tr>
+	<tr><td>rngOut :</td>
+		<td><input type="text" id="_p_rngOut"></td>
+		<td>포탄 수색 범위</td></tr>
+	<tr><td>rngIn :</td>
+		<td><input type="text" id="_p_rngIn"></td>
+		<td>포탄 파괴 범위</td></tr>
+	<tr><td>hole :</td>
+		<td><input type="text" id="_p_hole"></td>
+		<td>적 소굴의 수</td></tr>
+	<tr><td>holeEne :</td>
+		<td><input type="text" id="_p_holeEne"></td>
+		<td>적 소굴에서 나오는 적의 수</td></tr>
+	<tr><td>mvMax :</td>
+		<td><input type="text" id="_p_mvMax"></td>
+		<td>적 소굴에서부터의 최대이동횟수</td></tr>
+	<tr><td>mvX :</td>
+		<td><input type="text" id="_p_mvX"></td>
+		<td>적이 한 번에 X방향으로 이동하는 거리</td></tr>
+	<tr><td>mvY :</td>
+		<td><input type="text" id="_p_mvY"></td>
+		<td>적이 한 번에 Y방향으로 이동하는 거리</td></tr>
+	<tr><td>gthrRng :</td>
+		<td><input type="text" id="_p_gthrRng"></td>
+		<td>적끼리 서로 발견했을 때 무리짓는 시야범위(Max 20)</td></tr>
+	</table>
+	<input type="button" id="btnChngPrm" value="입력 내용을 적용">
+  </div>
+  <hr>
+  <canvas width=500 height=500 id="cnvs"></canvas>
+
+  <hr>
+  <h2>● 코드 입력</h2>
+  <div>
+	<textarea id="src" style="width: 600px; height: 250px;">
+	</textarea><br>
+  </div>
+
+  <div>
+	랜덤 시드<input type="text" value="0" id="seed"><br>
+	<input type="button" value="코드를 확인" id="chck">
+	<input type="button" value="시드를 1증가하여 확인" id="chckPls1">
+	<input type="button" value="100번 확인" id="chck100">
+	<input type="text" value="200" id="tryNo"
+		style="width: 5em; text-align: right;">
+	<input type="button" value="번 확인" id="chckN">
+  </div>
+
+  <h2>● 결과 판정</h2>
+  <textarea id="res" style="width: 600px; height: 10em;">
+  </textarea>
+
+</body>
+</html>

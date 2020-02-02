@@ -1,0 +1,40 @@
+function yourCode() {
+	// 배열 초기화
+	var resArr  = [];
+
+	var primeArr = [];	// 소수리스트
+	var numArr = [];	// 탐색리스트
+	var start = 2;		// 시작수치
+	var end = 100		// 종료수치
+	var n = start;		// 현재 확인중인 수치
+
+	// 시작수치 ~ 종료수치를 배열에 저장 
+	for (var i = start; i <= end; i ++) {
+		numArr.push(i);
+	}
+
+	// 탐색리스트가 빌 때까지 소수를 탐색
+	while (numArr.length) {
+		// 선두의 수치를 소수로 얻어옴
+		n = numArr.shift();
+
+		// 소수리스트에 저장
+		primeArr.push(n);
+
+		// 소수의 배수를 삭제
+		// 역순으로 루프를 돌림으로서 배열을 삭제하더라도
+		// i값을 그대로 처리할 수 있음
+		for (var i = numArr.length - 1; i >= 0; i --) {
+			if (numArr[i] % n == 0) numArr.splice(i, 1);
+		}
+
+		// 현재 소수의 제곱이 탐색리스트의 마지막 수보다 크면 종료
+		if (n * n > numArr[numArr.length - 1]) break;
+	}
+
+	// 남은리스트를 소수리스트에 더한 것이 얻고자 하는 소수의 배열
+	resArr = primeArr.concat(numArr);
+
+	// 결과를 돌려주고 종료
+	return resArr;
+}

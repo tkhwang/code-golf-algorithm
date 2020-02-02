@@ -1,0 +1,38 @@
+function yourCode(arg) {
+	// 식을 변환하기
+	var repStr = arg.replace(/(\d)-/g, "$1+-");
+
+	// 식을 분할하기
+	var splt = repStr.match(/[-\d]+|./g);
+	console.log(splt)
+
+	// 곱셈, 나눗셈을 실행하고 수치배열을 만들기
+	var num = [];
+	while (splt.length) {
+		var tgt = splt.shift();
+		if (tgt == "+") continue;	// 「+」덧셈
+		if (tgt == "*") {
+			// 「*」곱셈
+			var bfr  = num.pop();
+			var aftr = splt.shift();
+			num.push(bfr * aftr);
+		} else
+		if (tgt == "/") {
+			// 「/」나눗셈
+			var bfr  = num.pop();
+			var aftr = splt.shift();
+			num.push(bfr / aftr);
+		} else {
+			num.push(~~tgt);	// 수치
+		}
+	}
+	console.log(num)
+
+	// 수치배열의 합을 구하기
+	var res = 0;
+	while (num.length) res += num.shift();
+	console.log(res)
+
+	// 결과를 되돌리며 처리 종료
+	return res;
+}
